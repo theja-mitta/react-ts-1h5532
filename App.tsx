@@ -2,20 +2,20 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import './style.css';
 
+const maxTodos = 15;
+
 export default function App() {
-  // const [isLoading, setIsLoading] = useState(true);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     const fetchTodos = async () => {
-      let totalCount = 0;
+      let totalCallsCount = 0;
 
-      while (totalCount < 15) {
-        // setIsLoading(true);
+      while (totalCallsCount < 15) {
         const chunkOfTodos = await Promise.all(
           // Storing each chunk of 5 promises inside the new array being created here
           Array.from({ length: 5 }, (_, index) => {
-            const id = totalCount + index + 1;
+            const id = totalCallsCount + index + 1;
             return fetch(
               `https://jsonplaceholder.typicode.com/todos/${id}`
             ).then((response) => response.json());
@@ -24,10 +24,9 @@ export default function App() {
 
         // Appending newly fetched todos to previously stored todos
         setTodos((prevTodos) => [...prevTodos, ...chunkOfTodos]);
-        // setIsLoading(false);
-        totalCount += 5;
+        totalCallsCount += 5;
 
-        if (totalCount >= 15) {
+        if (totalCallsCount >= maxTodos) {
           alert('done');
           break;
         }
