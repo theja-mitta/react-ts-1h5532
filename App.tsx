@@ -12,7 +12,7 @@ export default function App() {
 
       while (totalCount < 15) {
         // setIsLoading(true);
-        const chunkTodos = await Promise.all(
+        const chunkOfTodos = await Promise.all(
           // Storing each chunk of 5 promises inside the new array being created here
           Array.from({ length: 5 }, (_, index) => {
             const id = totalCount + index + 1;
@@ -23,7 +23,7 @@ export default function App() {
         );
 
         // Appending newly fetched todos to previously stored todos
-        setTodos((prevTodos) => [...prevTodos, ...chunkTodos]);
+        setTodos((prevTodos) => [...prevTodos, ...chunkOfTodos]);
         // setIsLoading(false);
         totalCount += 5;
 
@@ -50,6 +50,10 @@ export default function App() {
           </li>
         ))}
       </ol>
+      {/* Displaying alert message when all API calls are completed */}
+      {todos.length === 15 && (
+        <div className="alert">All <span>{todos.length}</span> API calls are completed!</div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
-h1, p {
-  font-family: Lato;
+h1, p, .alert {
+  font-family: 'Marck Script', cursive;
+  text-align: center;
 }
 
 ol {
@@ -51,6 +52,7 @@ ol a:hover:after {
   border-left-color: #f9dd94;
 }
 
-h1 {
-  font-family: 'Marck Script', cursive;
+.alert span {
+  color: red;
+  font-size: 20px;
 }
